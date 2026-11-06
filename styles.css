@@ -1,0 +1,72 @@
+:root{
+  --cream:#f7f1e6; --paper:#fffaf2; --ink:#2b1d16; --muted:#7a6a5d; --line:#e6dccb;
+  --pist:#5f7f3a; --pist-d:#4b672c; --rasp:#a8323e; --rasp-d:#8a2732; --gold:#b8862e;
+  --r:18px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--cream);color:var(--ink);overscroll-behavior:none;-webkit-user-select:none;user-select:none}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-action:manipulation}
+.app{min-height:100%;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 18px) 28px calc(env(safe-area-inset-bottom) + 18px)}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.brand{display:flex;align-items:baseline;gap:10px}
+.brand-name{font-family:"Didot","Bodoni 72",Georgia,serif;font-size:30px;letter-spacing:.02em}
+.brand-sub{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.sync{display:flex;align-items:center;gap:8px;font-size:15px;color:var(--muted);background:var(--paper);border:1px solid var(--line);padding:8px 14px;border-radius:999px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--muted)}
+.dot.ok{background:var(--pist)} .dot.wait{background:var(--gold)} .dot.off{background:var(--rasp)}
+.screen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px}
+.hidden{display:none!important}
+
+.clock{text-align:center}
+.time{font-family:"Didot","Bodoni 72",Georgia,serif;font-size:clamp(64px,11vw,112px);line-height:1;font-variant-numeric:tabular-nums}
+.date{margin-top:8px;font-size:20px;color:var(--muted)}
+.pinbox{display:flex;flex-direction:column;align-items:center;gap:16px}
+.prompt{margin:0;font-size:22px;min-height:30px}
+.prompt.err{color:var(--rasp);font-weight:600}
+.dots{display:flex;gap:18px}
+.dots span{width:20px;height:20px;border-radius:50%;border:2px solid var(--ink);transition:background .12s}
+.dots span.f{background:var(--ink)}
+.dots.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
+.pad{display:grid;grid-template-columns:repeat(3,96px);gap:16px;margin-top:6px}
+.pad button{height:96px;border-radius:50%;background:var(--paper);border:1px solid var(--line);font-size:36px;box-shadow:0 2px 0 var(--line)}
+.pad button:active{background:var(--ink);color:var(--paper)}
+.pad button.aux{font-size:18px;background:transparent;border-color:transparent;box-shadow:none;color:var(--muted)}
+.pad button.aux:active{background:var(--line);color:var(--ink)}
+
+.who{text-align:center}
+.who h1{margin:0;font-family:"Didot","Bodoni 72",Georgia,serif;font-weight:400;font-size:46px}
+.who p{margin:6px 0 0;font-size:20px;color:var(--muted)}
+.cam{position:relative;width:min(460px,80vw);aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;background:#1b130e}
+.cam video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+.cam-msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:#f7f1e6;font-size:18px}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.flash.go{animation:flash .35s}
+@keyframes flash{0%{opacity:.9}100%{opacity:0}}
+.hint{margin:0;color:var(--muted);font-size:16px}
+.actions{display:flex;gap:18px}
+.btn{min-width:220px;height:84px;border-radius:var(--r);font-size:26px;font-weight:600;color:#fff}
+.btn.in{background:var(--pist)} .btn.in:active{background:var(--pist-d)}
+.btn.out{background:var(--rasp)} .btn.out:active{background:var(--rasp-d)}
+.btn.dim{opacity:.38}
+.btn:disabled{opacity:.25}
+.cancel{font-size:18px;color:var(--muted);padding:10px 20px}
+
+.check svg{width:120px;height:120px}
+.check circle{fill:none;stroke:var(--pist);stroke-width:3}
+.check path{fill:none;stroke:var(--pist);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40;animation:draw .4s .1s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+#done h1{margin:0;font-family:"Didot","Bodoni 72",Georgia,serif;font-weight:400;font-size:52px}
+#done p{margin:0;font-size:22px;color:var(--muted);text-align:center}
+
+@media (max-width:600px){
+  .app{padding-left:16px;padding-right:16px}
+  .pad{grid-template-columns:repeat(3,76px);gap:12px}.pad button{height:76px;font-size:30px}
+  .actions{flex-direction:column}.btn{min-width:260px;height:70px}
+  .brand-sub{display:none}
+}
+@media (orientation:landscape) and (min-width:900px){
+  #home{flex-direction:row;gap:80px}
+  .clock{text-align:left}
+}

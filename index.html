@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Time Clock">
+<meta name="theme-color" content="#2b1d16">
+<title>Giovanna Time Clock</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<main class="app">
+  <header class="top">
+    <div class="brand">
+      <span class="brand-name">Giovanna</span>
+      <span class="brand-sub">Time Clock</span>
+    </div>
+    <div class="sync" id="sync" role="status" aria-live="polite">
+      <span class="dot" id="syncDot"></span><span id="syncText">Starting…</span>
+    </div>
+  </header>
+
+  <!-- Home: clock + PIN pad -->
+  <section class="screen" id="home">
+    <div class="clock">
+      <div class="time" id="time">--:--</div>
+      <div class="date" id="date"></div>
+    </div>
+    <div class="pinbox">
+      <p class="prompt" id="prompt">Enter your 4-digit PIN</p>
+      <div class="dots" id="dots" aria-label="PIN entered">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <div class="pad" id="pad">
+        <button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button>
+        <button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button>
+        <button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button>
+        <button data-k="clear" class="aux">Clear</button><button data-k="0">0</button><button data-k="back" class="aux" aria-label="Delete">&#9003;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Punch: camera + in/out -->
+  <section class="screen hidden" id="punch">
+    <div class="who">
+      <h1 id="hello">Hi</h1>
+      <p id="status">You're clocked out.</p>
+    </div>
+    <div class="cam">
+      <video id="video" playsinline autoplay muted></video>
+      <div class="cam-msg hidden" id="camMsg">Starting camera…</div>
+      <div class="flash" id="flash"></div>
+    </div>
+    <p class="hint">Look at the camera. Your photo is taken when you tap.</p>
+    <div class="actions">
+      <button class="btn in" id="btnIn">Clock In</button>
+      <button class="btn out" id="btnOut">Clock Out</button>
+    </div>
+    <button class="cancel" id="cancel">Cancel</button>
+  </section>
+
+  <!-- Done -->
+  <section class="screen hidden" id="done">
+    <div class="check" aria-hidden="true">
+      <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg>
+    </div>
+    <h1 id="doneTitle">Clocked in</h1>
+    <p id="doneSub"></p>
+  </section>
+</main>
+<canvas id="canvas" hidden></canvas>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
